@@ -4,8 +4,8 @@
     <div class="tile is-ancestor has-text-centered">
         <div class="tile is-parent">
             <article class="tile is-child box">
-                <p class="title">{{$torneos->count()}}</p>
-                <p class="subtitle">Torneos</p>
+                <p class="title">{{$partidos->count()}}</p>
+                <p class="subtitle">Partidos</p>
             </article>
         </div>
         <div class="tile is-parent">
@@ -36,7 +36,7 @@
         <div class="card events-card">
             <header class="card-header">
                 <p class="card-header-title">
-                    Torneos
+                    Partidos
                 </p>
                 <a href="#" class="card-header-icon" aria-label="more options">
                     <span class="icon">
@@ -47,15 +47,22 @@
             <div class="card-table">
                 <div class="content">
                     <table class="table is-fullwidth is-striped">
+                        <th>
+                        <td>Local</td>
+                        <td>Visitante</td>
+                        <td>Fecha</td>
+                        <td>Torneo</td>
+                        <td></td>
+                        </th>
                         <tbody>
-                            @foreach($torneos as $torneo)
+                            @foreach($partidos as $partido)
                             <tr>
                                 <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>{{$torneo->genero}}</td>
-                                <td>{{$torneo->modo}}</td>
-                                <td>{{$torneo->anio}}</td>
-                                <td>{{$torneo->temporada}}</td>
-                                <td class="level-right"><a class="button is-small is-primary" href="{{route('torneos.show',$torneo->id)}}">Ver</a></td>
+                                <td>{{$partido->local->nombre}}</td>
+                                <td>{{$partido->visitante->nombre}}</td>
+                                <td>{{$partido->fecha}}</td>
+                                <td><em>{{$partido->torneo->id}}</em></td>
+                                <td class="level-right"><a class="button is-small is-primary" href="{{route('partidos.show',$partido->id)}}">Ver</a></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -64,16 +71,17 @@
             </div>
             <footer class="card-footer">
                 <div class="card-footer-item">
-                    <a href="{{route('torneos.create')}}" class="button is-info">Crear</a>
+                    <a>Volver</a>
                 </div>
             </footer>
         </div>
     </div>
     <div class="column is-6">
         <div class="card">
+            <form action="{{route('partidos.create')}}" method="GET">
             <header class="card-header">
                 <p class="card-header-title">
-                    Inventory Search
+                    Seleccionar Torneo
                 </p>
                 <a href="#" class="card-header-icon" aria-label="more options">
                     <span class="icon">
@@ -83,17 +91,26 @@
             </header>
             <div class="card-content">
                 <div class="content">
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-large" type="text" placeholder="">
-                        <span class="icon is-medium is-left">
-                            <i class="fa fa-search"></i>
-                        </span>
-                        <span class="icon is-medium is-right">
-                            <i class="fa fa-check"></i>
-                        </span>
+                    <div class="field">
+                        <label class="label">Torneo</label>
+                        <div class="control">
+                            <div class="select is-medium">
+                                <select name="torneo">
+                                    @foreach($torneos as $torneo)
+                                    <option value="{{$torneo->id}}">{{$torneo->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
+            <footer class="card-footer">
+                <div class="card-footer-item">
+                    <button class="button is-info">Crear</button>
+                </div>
+            </footer>
+            </form>
         </div>
     </div>
 </div>

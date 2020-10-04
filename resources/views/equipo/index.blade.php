@@ -4,8 +4,8 @@
     <div class="tile is-ancestor has-text-centered">
         <div class="tile is-parent">
             <article class="tile is-child box">
-                <p class="title">{{$torneos->count()}}</p>
-                <p class="subtitle">Torneos</p>
+                <p class="title">{{$equipos->count()}}</p>
+                <p class="subtitle">Equipos</p>
             </article>
         </div>
         <div class="tile is-parent">
@@ -36,7 +36,7 @@
         <div class="card events-card">
             <header class="card-header">
                 <p class="card-header-title">
-                    Torneos
+                    Equipos
                 </p>
                 <a href="#" class="card-header-icon" aria-label="more options">
                     <span class="icon">
@@ -47,15 +47,18 @@
             <div class="card-table">
                 <div class="content">
                     <table class="table is-fullwidth is-striped">
+                        <th>
+                            <td>Equpo</td>
+                            <td>Torneo</td>
+                            <td></td>
+                        </th>
                         <tbody>
-                            @foreach($torneos as $torneo)
+                            @foreach($equipos as $equipo)
                             <tr>
                                 <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>{{$torneo->genero}}</td>
-                                <td>{{$torneo->modo}}</td>
-                                <td>{{$torneo->anio}}</td>
-                                <td>{{$torneo->temporada}}</td>
-                                <td class="level-right"><a class="button is-small is-primary" href="{{route('torneos.show',$torneo->id)}}">Ver</a></td>
+                                <td>{{$equipo->nombre}}</td>
+                                <td><em>{{$equipo->torneo->id}}</em></td>
+                                <td class="level-right"><a class="button is-small is-primary" href="{{route('equipos.show',$equipo->id)}}">Ver</a></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -64,7 +67,7 @@
             </div>
             <footer class="card-footer">
                 <div class="card-footer-item">
-                    <a href="{{route('torneos.create')}}" class="button is-info">Crear</a>
+                    <a href="{{route('equipos.create')}}" class="button is-info">Crear</a>
                 </div>
             </footer>
         </div>

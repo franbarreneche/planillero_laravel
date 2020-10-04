@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Torneo;
 
 class TorneoController extends Controller
 {
@@ -13,7 +14,8 @@ class TorneoController extends Controller
      */
     public function index()
     {
-        return view('torneo.index');
+        $torneos = Torneo::all();
+        return view('torneo.index',['torneos'=>$torneos]);
     }
 
     /**
@@ -23,7 +25,11 @@ class TorneoController extends Controller
      */
     public function create()
     {
-        //
+        return view('torneo.create',[
+            'temporadas'=>Torneo::TEMPORADAS,
+            'generos'=>Torneo::GENEROS,
+            'modos'=>Torneo::MODOS
+            ]);
     }
 
     /**
@@ -34,7 +40,27 @@ class TorneoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'       => 'required',
+            'anio' => 'required|numeric',
+            'temporada' => 'required',
+            'genero' => 'required',
+            'modo' => 'required'
+        ]);       
+        
+        // guardar porque es valido
+        $torneo = new Torneo();
+        $torneo->nombre = request("nombre");
+        $torneo->anio = request("anio");
+        $torneo->temporada = request("temporada");
+        $torneo->genero = request("genero");
+        $torneo->modo = request("modo");
+        
+        $torneo->save();
+
+        // redirect        
+        return redirect()->route('torneos.index')->with("message","Se creó el torneo exitosamente");
+        
     }
 
     /**
@@ -45,7 +71,8 @@ class TorneoController extends Controller
      */
     public function show($id)
     {
-        //
+        $torneo = Torneo::findOrFail($id);
+        return view('torneo.show',["torneo"=>$torneo]);
     }
 
     /**
@@ -56,7 +83,8 @@ class TorneoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $torneo = Torneo::findOrFail($id);
+        return view('torneo.edit',["torneo"=>$torneo]);
     }
 
     /**
@@ -67,8 +95,23 @@ class TorneoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        
+        $request->validate([
+            'nombre'       => 'required',
+            'anio' => 'required|numeric',
+            'temporada' => 'required',
+            'genero' => 'required',
+            'modo' => 'required'
+        ]);      
+        
+        $torneo = torneo::findOrFail($id);  
+        $torneo->nombre = request("nombre");
+        $torneo->anio = request("anio");
+        $torneo->temporada = request("temporada");
+        $torneo->genero = request("genero");
+        $torneo->modo = request("modo");
+        $torneo->update();
+        return redirect()->route("torneos.index")->with(["message"=>"Torneo ".$torneo->nombre." actualizado con éxito"]);
     }
 
     /**
@@ -79,6 +122,8 @@ class TorneoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $torneo = torneo::findOrFail($id);
+        $torneo->delete();
+        return redirect()->route("torneos.index")->with(["message"=>"Torneo ".$torneo->nombre." eliminada con éxito"]);
     }
 }

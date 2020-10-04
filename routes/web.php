@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PartidoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TorneoController;
 
@@ -19,3 +21,7 @@ Route::get('/', function () {
 });
 
 Route::resource('torneos', TorneoController::class);
+
+Route::resource('equipos', EquipoController::class);
+
+Route::resource('partidos', PartidoController::class);
