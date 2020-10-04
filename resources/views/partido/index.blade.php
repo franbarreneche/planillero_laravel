@@ -33,6 +33,7 @@
         @if(session("message"))
         <div class="notification is-info is-light"><button class="delete"></button>{{ session("message")  }}</div>
         @endif
+        <form action="{{route('partidos.exportar.pdf')}}" method="GET">
         <div class="card events-card">
             <header class="card-header">
                 <p class="card-header-title">
@@ -57,7 +58,8 @@
                         <tbody>
                             @foreach($partidos as $partido)
                             <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                <!-- <td width="5%"><i class="fa fa-bell-o"></i></td> -->
+                                <td width="5%"><input type="checkbox" name="partidos[]" value="{{$partido->id}}"> </td>
                                 <td>{{$partido->local->nombre}}</td>
                                 <td>{{$partido->visitante->nombre}}</td>
                                 <td>{{$partido->fecha}}</td>
@@ -71,10 +73,11 @@
             </div>
             <footer class="card-footer">
                 <div class="card-footer-item">
-                    <a>Volver</a>
+                    <button class="button is-dark" type="submit">Exportar PDF</button>
                 </div>
             </footer>
         </div>
+        </form>
     </div>
     <div class="column is-6">
         <div class="card">

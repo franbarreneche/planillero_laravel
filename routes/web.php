@@ -20,6 +20,8 @@ Route::get('/', function () {
     return redirect()->route('torneos.index');
 });
 
+Route::get('/partidos/exportar/pdf',[PartidoController::class,"crearPDF"])->name('partidos.exportar.pdf');
+
 Route::resource('torneos', TorneoController::class);
 
 Route::resource('equipos', EquipoController::class);
