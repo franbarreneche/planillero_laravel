@@ -27,11 +27,37 @@
             </div>
 
             <div class="field">
+                <label class="label">Hora</label>
+                <div class="control">                      
+                    <input class="input" type="time" name="hora" data-display-mode="inline" data-is-range="true" data-close-on-select="false">                    
+                </div>                      
+              @error('hora')
+                <p class="help is-danger">{{$message}}</p>
+                @enderror          
+            </div>
+
+            <div class="field">
                 <label class="label">Matchday</label>
                 <div class="control">
                     <input class="input" name="matchday" type="text" maxlength="15">                    
                 </div>                      
               @error('dia')
+                <p class="help is-danger">{{$message}}</p>
+                @enderror          
+            </div>
+
+            <div class="field">
+                <label class="label">Sede</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="sede">
+                        @foreach($sedes as $sede)
+                            <option value="{{$sede->id}}">{{$sede->nombre}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                </div>                      
+              @error('sede')
                 <p class="help is-danger">{{$message}}</p>
                 @enderror          
             </div>

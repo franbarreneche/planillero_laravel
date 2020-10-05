@@ -17,10 +17,28 @@
             </div>
 
             <div class="field">
+                <label class="label">Hora</label>
+                <div class="control">                      
+                    <input class="input" type="time" name="fecha" data-display-mode="inline" data-is-range="true" data-close-on-select="false" value="{{$partido->hora}}" disabled>                    
+                </div>         
+            </div>
+
+            <div class="field">
                 <label class="label">Matchday</label>
                 <div class="control">
                     <input class="input" name="matchday" type="text" maxlength="15" value="{{$partido->matchday}}" disabled>                    
                 </div>           
+            </div>
+
+            <div class="field">
+                <label class="label">Sede</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="local" disabled>                        
+                            <option value="{{$partido->sede->id}}" selected>{{$partido->sede->nombre}}</option>                        
+                        </select>
+                    </div>
+                </div>            
             </div>
             
             <div class="field">

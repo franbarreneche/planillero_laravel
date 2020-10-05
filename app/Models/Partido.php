@@ -22,4 +22,8 @@ class Partido extends Model
         return $this->belongsTo('App\Models\Equipo','equipo2_id');
     }
 
+    public function sede() {
+        return $this->belongsTo('App\Models\Sede','sede_id');
+    }
+
 }

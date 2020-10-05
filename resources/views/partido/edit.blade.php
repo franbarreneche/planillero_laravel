@@ -27,11 +27,41 @@
             </div>
 
             <div class="field">
+                <label class="label">Hora</label>
+                <div class="control">                      
+                    <input class="input" type="time" name="hora" data-display-mode="inline" data-is-range="true" data-close-on-select="false" value="{{$partido->hora}}">                    
+                </div>                      
+              @error('hora')
+                <p class="help is-danger">{{$message}}</p>
+                @enderror          
+            </div>
+
+            <div class="field">
                 <label class="label">Matchday</label>
                 <div class="control">
                     <input class="input" name="matchday" type="text" maxlength="15" value="{{$partido->matchday}}">                    
                 </div>                      
               @error('dia')
+                <p class="help is-danger">{{$message}}</p>
+                @enderror          
+            </div>
+            
+            <div class="field">
+                <label class="label">Sede</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="sede">
+                        @foreach($sedes as $sede)
+                        @if($sede->id == $partido->sede->id)
+                            <option value="{{$sede->id}}" selected>{{$sede->nombre}}</option>
+                        @else
+                            <option value="{{$sede->id}}">{{$sede->nombre}}</option>
+                        @endif
+                        @endforeach
+                        </select>
+                    </div>
+                </div>                      
+              @error('local')
                 <p class="help is-danger">{{$message}}</p>
                 @enderror          
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Partido;
 use App\Models\Torneo;
+use App\Models\Sede;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class PartidoController extends Controller
@@ -29,7 +30,8 @@ class PartidoController extends Controller
     public function create(Request $request)
     {
         $torneo = Torneo::findOrFail(request('torneo'));
-        return view('partido.create',["torneo"=>$torneo]);
+        $sedes = Sede::all();
+        return view('partido.create',["torneo"=>$torneo,"sedes" => $sedes]);
     }
 
     /**
@@ -45,16 +47,20 @@ class PartidoController extends Controller
             'local'       => 'required',
             'visitante'    => 'required',
             'fecha'       => 'required',
-            'matchday' => 'required'
+            'hora'       => 'required',
+            'matchday' => 'required',
+            'sede' => 'required'
         ]);       
         
         // guardar porque es valido
         $partido = new Partido();
         $partido->torneo_id = request('torneo');
-        $partido->equipo1_id = request('local');
+        $partido->equipo1_id = request('local');        
         $partido->equipo2_id = request('visitante');
+        $partido->sede_id = request('sede');
         $partido->fecha = request('fecha');
-        $partido->matchday = request('matchday');
+        $partido->hora = request('hora');
+        $partido->matchday = request('matchday');        
 
         $partido->save();
         
@@ -83,7 +89,8 @@ class PartidoController extends Controller
     public function edit($id)
     {
         $partido = Partido::findOrFail($id);
-        return view('partido.edit',["partido"=>$partido]);
+        $sedes = Sede::all();
+        return view('partido.edit',["partido"=>$partido,"sedes"=>$sedes]);
     }
 
     /**
@@ -97,15 +104,19 @@ class PartidoController extends Controller
     {
         $request->validate([
             'fecha'       => 'required',
+            'hora'       => 'required',
             'local'       => 'required',
-            'visitante'       => 'required'
+            'visitante'       => 'required',
+            'sede' => 'required'
         ]);      
         
         $partido = Partido::findOrFail($id);
         $partido->fecha = request('fecha');
+        $partido->hora = request('hora');
         $partido->matchday = request('matchday');
         $partido->equipo1_id = request('local');
         $partido->equipo2_id = request('visitante');
+        $partido->sede_id = request('sede');
 
         $partido->update();
 
