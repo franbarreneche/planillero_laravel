@@ -56,6 +56,29 @@ class EquipoController extends Controller
         return redirect()->route('equipos.index')->with("message","Se creó el equipo exitosamente");
     }
 
+     /**
+     * Store several newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeBatch(Request $request,$id)
+    {           
+        $prueba = request('nombre');
+        foreach($prueba as $nombreEquipo) {
+            if($nombreEquipo != ""){
+                $equipo = new Equipo();
+                $equipo->nombre = $nombreEquipo;
+                $equipo->jugadores = "";
+                $equipo->torneo_id = $id;
+
+                $equipo->save();
+            }            
+        }
+        // redirect        
+        return redirect()->route('torneos.edit',$id)->with("message","Se crearon los equipos exitosamente");
+    }
+
     /**
      * Display the specified resource.
      *

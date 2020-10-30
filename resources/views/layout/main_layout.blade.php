@@ -73,22 +73,25 @@
                         </div>
                     </div>
                 </section>
-                @yield('content')                
+                @if(session("message"))
+                <div class="notification is-info is-light"><button class="delete"></button>{{ session("message")  }}</div>
+                @endif
+                @yield('content')
             </div>
         </div>
     </div>
 
- <script>
-     document.addEventListener('DOMContentLoaded', () => {
-  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    var $notification = $delete.parentNode;
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                var $notification = $delete.parentNode;
 
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-    });
-  });
-});
- </script>   
+                $delete.addEventListener('click', () => {
+                    $notification.parentNode.removeChild($notification);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

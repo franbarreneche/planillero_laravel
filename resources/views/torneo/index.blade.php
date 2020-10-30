@@ -29,10 +29,7 @@
     </div>
 </section>
 <div class="columns">
-    <div class="column is-6">
-        @if(session("message"))
-        <div class="notification is-info is-light"><button class="delete"></button>{{ session("message")  }}</div>
-        @endif
+    <div class="column is-6">        
         <div class="card events-card">
             <header class="card-header">
                 <p class="card-header-title">

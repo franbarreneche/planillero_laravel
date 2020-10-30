@@ -31,6 +31,7 @@ class TorneoController extends Controller
             'modos'=>Torneo::MODOS
             ]);
     }
+    
 
     /**
      * Store a newly created resource in storage.
