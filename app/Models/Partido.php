@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Partido extends Model
 {
     use HasFactory;
-    protected $table = "partidos";
+    protected $table = "partidos";  
+    
 
     public function torneo() {
         return $this->belongsTo('App\Models\Torneo');
@@ -26,4 +28,13 @@ class Partido extends Model
         return $this->belongsTo('App\Models\Sede','sede_id');
     }
 
+    //accessors
+    public function getFechaAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y');
+    }
+
+    public function getHoraAttribute($value) {
+        return Carbon::parse($value)->format('H:i');
+    }
+     
 }

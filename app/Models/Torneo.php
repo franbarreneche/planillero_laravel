@@ -17,14 +17,14 @@ class Torneo extends Model
      * obtener la lista de equipos que compiten en un torneo
      */
     public function equipos() {
-        return $this->hasMany('App\Models\Equipo');
+        return $this->hasMany('App\Models\Equipo')->orderBy('nombre');
     }
 
     /**
      * obtener la lista de partidos que pertenecen a un torneo
      */
     public function partidos() {
-        return $this->hasMany('App\Models\Partido');
+        return $this->hasMany('App\Models\Partido')->orderByDesc('fecha');
     }
 
 }
