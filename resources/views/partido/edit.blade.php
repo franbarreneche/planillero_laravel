@@ -19,7 +19,7 @@
             <div class="field">
                 <label class="label">Fecha</label>
                 <div class="control">                      
-                    <input class="input" type="date" name="fecha" data-display-mode="inline" data-is-range="true" data-close-on-select="false" value="{{$partido->fecha}}">                    
+                    <input class="input" type="date" name="fecha" data-display-mode="inline" data-is-range="true" data-close-on-select="false" value="{{$partido->fecha->format('Y-m-d')}}">                    
                 </div>                      
               @error('fecha')
                 <p class="help is-danger">{{$message}}</p>

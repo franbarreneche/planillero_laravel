@@ -68,6 +68,36 @@ class PartidoController extends Controller
         return redirect()->route('partidos.index')->with("message","Se creó el partido exitosamente");
     }
 
+     /**
+     * Store several newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeBatch(Request $request,$id)
+    {           
+        $locales = request('local');
+        $visitantes = request('visitante');
+        $fechas = request('fecha');
+        $horas = request('hora');
+        $matchdays = request('matchday');
+        $sedes = request('sede'); 
+
+        for($i=0;$i<count($locales);$i++) {
+            $partido = new Partido();
+            $partido->torneo_id = $id;
+            $partido->equipo1_id = $locales[$i];          
+            $partido->equipo2_id = $visitantes[$i];
+            $partido->sede_id = $sedes[$i];
+            $partido->fecha = $fechas[$i];
+            $partido->hora = $horas[$i];
+            $partido->matchday = $matchdays[$i];
+
+            $partido->save();
+        } 
+        return redirect()->route('torneos.edit',$id)->with("message","Se crearon los partidos exitosamente");
+    }
+
     /**
      * Display the specified resource.
      *

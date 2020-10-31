@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Torneo;
+use App\Models\Sede;
 
 class TorneoController extends Controller
 {
@@ -85,7 +86,8 @@ class TorneoController extends Controller
     public function edit($id)
     {
         $torneo = Torneo::findOrFail($id);
-        return view('torneo.edit',["torneo"=>$torneo]);
+        $sedes = Sede::all();
+        return view('torneo.edit',["torneo"=>$torneo, "sedes" => $sedes]);
     }
 
     /**

@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/partidos/exportar/pdf',[PartidoController::class,"crearPDF"])->name('partidos.exportar.pdf');
+Route::post('/partidos/storeBatch/{id}',[PartidoController::class,'storeBatch'])->name('partidos.storeBatch');
 
 Route::resource('torneos', TorneoController::class);
 
