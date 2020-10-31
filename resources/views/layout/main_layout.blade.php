@@ -41,7 +41,7 @@
                     <a class="navbar-item" href="{{route('partidos.index')}}">
                         Partidos
                     </a>
-                    <a class="navbar-item" href="/">
+                    <a class="navbar-item" href="{{route('partidos.exportar.index')}}">
                         Exportador
                     </a>
                 </div>

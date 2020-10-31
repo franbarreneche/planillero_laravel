@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Partido;
 use App\Models\Torneo;
 use App\Models\Sede;
-use Barryvdh\DomPDF\Facade as PDF;
 
 class PartidoController extends Controller
 {
@@ -167,21 +166,6 @@ class PartidoController extends Controller
     }
 
 
-    /**
-     * crear PDF
-     */
-    public function crearPDF(Request $request) {    
-      
-      $partidos_keys = request("partidos");
-      if($partidos_keys == null) return back()->with("message","Boludo, no seleccionaste nada");
-      $data = Partido::find($partidos_keys);
-      
-      // share data to view
-      view()->share('partidos',$data);
-      $pdf = PDF::loadView('partido.modelo_planilla_2', $data);
-
-      // download PDF file with download method
-      return $pdf->download('partidos.pdf');         
-    }
+    
 }
 

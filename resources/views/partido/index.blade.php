@@ -28,12 +28,7 @@
         </div>
     </div>
 </section>
-<div class="columns">
-    <div class="column is-6">
-        @if(session("message"))
-        <div class="notification is-info is-light"><button class="delete"></button>{{ session("message")  }}</div>
-        @endif
-        <form action="{{route('partidos.exportar.pdf')}}" method="GET">
+<section class="container">
         <div class="card events-card">
             <header class="card-header">
                 <p class="card-header-title">
@@ -73,25 +68,7 @@
             </div>
             <footer class="card-footer">
                 <div class="card-footer-item">
-                    <button class="button is-dark" type="submit">Exportar PDF</button>
-                </div>
-            </footer>
-        </div>
-        </form>
-    </div>
-    <div class="column is-6">
-        <div class="card">
-            <form action="{{route('partidos.create')}}" method="GET">
-            <header class="card-header">
-                <p class="card-header-title">
-                    Seleccionar Torneo
-                </p>
-                <a href="#" class="card-header-icon" aria-label="more options">
-                    <span class="icon">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                </a>
-            </header>
+                <form action="{{route('partidos.create')}}" method="GET">
             <div class="card-content">
                 <div class="content">
                     <div class="field">
@@ -114,7 +91,8 @@
                 </div>
             </footer>
             </form>
+                </div>
+            </footer>
         </div>
-    </div>
-</div>
+</section>
 @endsection
