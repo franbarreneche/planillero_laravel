@@ -121,7 +121,7 @@ class EquipoController extends Controller
         $equipo->nombre = request('nombre');
         $equipo->jugadores = request('jugadores');
         $equipo->update();
-        return redirect()->route("equipos.index")->with(["message"=>"Equipo ".$equipo->nombre." actualizado con éxito"]);
+        return back()->with(["message"=>"Equipo ".$equipo->nombre." actualizado con éxito"]);
     }
 
     /**

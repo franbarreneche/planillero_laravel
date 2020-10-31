@@ -44,7 +44,8 @@
 
     <!-- -->
     <div class="card events-card">
-        <form action="{{route('partidos.exportar.pdf')}}" method="GET">
+        <form action="{{route('partidos.exportar.pdf')}}" method="POST">
+            @csrf
             <header class="card-header">
                 <p class="card-header-title">
                     Partidos

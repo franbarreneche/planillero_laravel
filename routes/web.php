@@ -35,5 +35,5 @@ Route::resource('partidos', PartidoController::class);
 
 //RUtas para Exportacion
 Route::get('/exportar',[ExportacionController::class,"index"])->name('partidos.exportar.index');
-Route::get('/exportar/pdf',[ExportacionController::class,"exportarPartidosPDF"])->name('partidos.exportar.pdf');
+Route::post('/exportar/pdf',[ExportacionController::class,"exportarPartidosPDF"])->name('partidos.exportar.pdf');
 Route::get('/exportar/csv',[ExportacionController::class,"exportarPartidosCSV"])->name('partidos.exportar.csv');

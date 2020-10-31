@@ -114,7 +114,7 @@ class TorneoController extends Controller
         $torneo->genero = request("genero");
         $torneo->modo = request("modo");
         $torneo->update();
-        return redirect()->route("torneos.index")->with(["message"=>"Torneo ".$torneo->nombre." actualizado con éxito"]);
+        return back()->with(["message"=>"Torneo ".$torneo->nombre." actualizado con éxito"]);
     }
 
     /**

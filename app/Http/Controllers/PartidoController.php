@@ -149,7 +149,7 @@ class PartidoController extends Controller
 
         $partido->update();
 
-        return redirect()->route("partidos.index")->with(["message"=>"EL partido se actualizado con éxito"]);  
+        return back()->with(["message"=>"EL partido se actualizado con éxito"]);  
     }
 
     /**
